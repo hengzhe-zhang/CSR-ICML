@@ -8,6 +8,7 @@
   <meta property="og:title" content="Contrastive Symbolic Regression (CSR) · ICML 2026">
   <meta property="og:description" content="Symbolic feature spaces where geometric proximity reflects target similarity — with closed-form contrastive alignment, adaptive KNN, and DPP ensembles.">
   <meta property="og:type" content="website">
+  <meta name="theme-color" content="#062a47">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,700;8..60,800&display=swap" rel="stylesheet">
@@ -23,13 +24,16 @@
         <li><a href="#results">Results</a></li>
         <li><a href="#interpretability">Interpretability</a></li>
         <li><a href="#citation">Cite</a></li>
+        <li><a class="nav-github" href="https://github.com/hengzhe-zhang/CSR-ICML" aria-label="CSR source code on GitHub">GitHub ↗</a></li>
       </ul>
     </div>
   </nav>
 
   <header class="hero" id="top">
+    <div class="hero-orb hero-orb-one" aria-hidden="true"></div>
+    <div class="hero-orb hero-orb-two" aria-hidden="true"></div>
     <div class="wrap hero-grid">
-      <div>
+      <div class="hero-copy">
         <div class="badge-row">
           <span class="pill icml">ICML 2026</span>
           <span class="pill">Symbolic Regression</span>
@@ -44,12 +48,13 @@
         <p class="authors">Hengzhe Zhang<sup>1</sup>, Qi Chen<sup>1</sup>, Bing Xue<sup>1</sup>, Wolfgang Banzhaf<sup>2</sup>, Mengjie Zhang<sup>1</sup></p>
         <p class="affils"><sup>1</sup>Victoria University of Wellington &nbsp;·&nbsp; <sup>2</sup>Michigan State University</p>
         <div class="cta-row">
-          <a class="btn btn-primary" href="https://github.com/hengzhe-zhang/CSR-ICML">Code on GitHub</a>
-          <a class="btn btn-ghost" href="https://github.com/hengzhe-zhang/CSR-ICML">Paper Repository</a>
-          <a class="btn btn-ghost" href="#citation">BibTeX</a>
+          <a class="btn btn-primary" href="https://github.com/hengzhe-zhang/CSR-ICML"><span aria-hidden="true">⌘</span> Code</a>
+          <a class="btn btn-ghost" href="#method"><span aria-hidden="true">◇</span> Explore the method</a>
+          <a class="btn btn-ghost" href="#citation"><span aria-hidden="true">“</span> BibTeX</a>
         </div>
       </div>
       <aside class="hero-card" aria-label="Headline result">
+        <div class="hero-card-label"><span></span> Benchmark overview</div>
         <img src="assets/srbench_icml.svg" alt="SRBench results: CSR ranks first among 27 algorithms on 58 datasets">
         <div class="hero-stats">
           <div class="stat"><strong>#1</strong><span>SRBench rank</span></div>
@@ -67,6 +72,8 @@
         <h2>Relational structure, not only input–output maps</h2>
       </div>
       <div class="card abstract">
+        <div class="abstract-mark" aria-hidden="true">Φ</div>
+        <div>
         <p>
           Existing symbolic regression approaches primarily learn explicit input–output mappings and often neglect
           relational structure among instances. <strong>Contrastive Symbolic Regression (CSR)</strong> integrates
@@ -79,6 +86,7 @@
           On 58 real-world regression datasets, CSR consistently surpasses traditional symbolic regression and modern
           machine learning counterparts.
         </p>
+        </div>
       </div>
     </div>
   </section>
@@ -129,10 +137,10 @@
       </figure>
 
       <div class="contribs" style="margin-top:1rem">
-        <div class="contrib c1"><span class="tag">C1</span><p><strong>Closed-form W</strong> — contrastive projection without iterative gradients inside evolution.</p></div>
-        <div class="contrib c2"><span class="tag">C2</span><p><strong>Efficient LOOCV for K</strong> — one neighbor search selects neighborhood size for all K.</p></div>
-        <div class="contrib c3"><span class="tag">C3</span><p><strong>Rank-weighted KNN</strong> — faithful fitness for representation smoothness.</p></div>
-        <div class="contrib c4"><span class="tag">C4</span><p><strong>DPP ensemble</strong> — quality–diversity hall-of-fame selection.</p></div>
+        <div class="contrib c1"><span class="tag">C1</span><span class="contrib-icon" aria-hidden="true">W</span><p><strong>Closed-form W</strong> — contrastive projection without iterative gradients inside evolution.</p></div>
+        <div class="contrib c2"><span class="tag">C2</span><span class="contrib-icon" aria-hidden="true">K</span><p><strong>Efficient LOOCV for K</strong> — one neighbor search selects neighborhood size for all K.</p></div>
+        <div class="contrib c3"><span class="tag">C3</span><span class="contrib-icon" aria-hidden="true">∑</span><p><strong>Rank-weighted KNN</strong> — faithful fitness for representation smoothness.</p></div>
+        <div class="contrib c4"><span class="tag">C4</span><span class="contrib-icon" aria-hidden="true">◆</span><p><strong>DPP ensemble</strong> — quality–diversity hall-of-fame selection.</p></div>
       </div>
 
       <div class="method-steps">
@@ -402,7 +410,7 @@
           <ul style="margin:0;padding-left:1.1rem;line-height:1.9">
             <li><a href="https://github.com/hengzhe-zhang/CSR-ICML">GitHub: hengzhe-zhang/CSR-ICML</a></li>
             <li><a href="https://github.com/hengzhe-zhang/EvolutionaryForest">EvolutionaryForest (dependency)</a></li>
-            <li>Contact: <a href="mailto:qi.chen@ecs.vuw.ac.nz">qi.chen@ecs.vuw.ac.nz</a></li>
+            <li>Contact: <a href="mailto:hengzhe.zhang@ecs.vuw.ac.nz">hengzhe.zhang@ecs.vuw.ac.nz</a></li>
           </ul>
           <div class="logos" style="margin-top:1.4rem">
             <img src="assets/vuw.png" alt="Victoria University of Wellington">
