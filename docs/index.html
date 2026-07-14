@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CSR · Contrastive Symbolic Regression · ICML 2026</title>
+  <meta name="description" content="Contrastive Symbolic Regression (CSR): aligned symbolic representations, adaptive KNN prediction, and diverse ensembles. ICML 2026.">
+  <meta property="og:title" content="Contrastive Symbolic Regression (CSR) · ICML 2026">
+  <meta property="og:description" content="Symbolic feature spaces where geometric proximity reflects target similarity — with closed-form contrastive alignment, adaptive KNN, and DPP ensembles.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,700;8..60,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="nav" aria-label="Primary">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top"><span class="brand-mark">CSR</span> Contrastive Symbolic Regression</a>
+      <ul class="nav-links">
+        <li><a href="#abstract">Abstract</a></li>
+        <li><a href="#method">Method</a></li>
+        <li><a href="#results">Results</a></li>
+        <li><a href="#interpretability">Interpretability</a></li>
+        <li><a href="#citation">Cite</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="badge-row">
+          <span class="pill icml">ICML 2026</span>
+          <span class="pill">Symbolic Regression</span>
+          <span class="pill">Contrastive Learning</span>
+          <span class="pill">KNN Ensembles</span>
+        </div>
+        <h1>Contrastive Symbolic Regression: Aligned Representations, Adaptive Prediction, and Diverse Ensembles</h1>
+        <p class="lede">
+          CSR evolves symbolic features whose distances mirror target similarity, then uses ridge + adaptive KNN
+          and DPP ensemble selection for accurate, interpretable regression.
+        </p>
+        <p class="authors">Hengzhe Zhang<sup>1</sup>, Qi Chen<sup>1</sup>, Bing Xue<sup>1</sup>, Wolfgang Banzhaf<sup>2</sup>, Mengjie Zhang<sup>1</sup></p>
+        <p class="affils"><sup>1</sup>Victoria University of Wellington &nbsp;·&nbsp; <sup>2</sup>Michigan State University</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://github.com/hengzhe-zhang/CSR-ICML">Code on GitHub</a>
+          <a class="btn btn-ghost" href="https://github.com/hengzhe-zhang/CSR-ICML">Paper Repository</a>
+          <a class="btn btn-ghost" href="#citation">BibTeX</a>
+        </div>
+      </div>
+      <aside class="hero-card" aria-label="Headline result">
+        <img src="assets/srbench_icml.svg" alt="SRBench results: CSR ranks first among 27 algorithms on 58 datasets">
+        <div class="hero-stats">
+          <div class="stat"><strong>#1</strong><span>SRBench rank</span></div>
+          <div class="stat"><strong>58</strong><span>datasets</span></div>
+          <div class="stat"><strong>27</strong><span>algorithms</span></div>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <section id="abstract">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Abstract</span>
+        <h2>Relational structure, not only input–output maps</h2>
+      </div>
+      <div class="card abstract">
+        <p>
+          Existing symbolic regression approaches primarily learn explicit input–output mappings and often neglect
+          relational structure among instances. <strong>Contrastive Symbolic Regression (CSR)</strong> integrates
+          evolutionary feature construction with contrastive learning to shape a representation space where geometric
+          proximity reflects similarity in the target space. A closed-form linear transformation aligns constructed
+          features with targets; ridge regression captures global trends while adaptive KNN models local residuals;
+          and DPP-based ensemble selection improves robustness via quality–diversity.
+        </p>
+        <p style="margin-bottom:0">
+          On 58 real-world regression datasets, CSR consistently surpasses traditional symbolic regression and modern
+          machine learning counterparts.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="motivation">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Motivation</span>
+        <h2>Why regression needs distance alignment</h2>
+        <p>
+          Classification can group discrete classes; regression needs a continuous geometry where nearby points share
+          similar targets — the setting where KNN and instance-level explanations work.
+        </p>
+      </div>
+      <div class="grid-2">
+        <figure class="card">
+          <h3>Classification</h3>
+          <img src="assets/classification_moons.png" alt="Classification moons: discrete class clusters">
+          <figcaption class="caption">Discrete labels form separable neighborhoods.</figcaption>
+        </figure>
+        <figure class="card">
+          <h3>Regression</h3>
+          <img src="assets/regression_challenge.png" alt="Regression feature space colored by continuous target">
+          <figcaption class="caption">Continuous targets require geometry that tracks target proximity.</figcaption>
+        </figure>
+      </div>
+      <div class="eq-box" style="margin-top:1rem">
+        <strong>Target-aligned representation</strong>
+        <img src="assets/math/target_align.svg" alt="Feature distance proportional to target distance">
+        <div class="note"><b>Φ(x)</b>: symbolic features &nbsp;·&nbsp; <b>y</b>: target &nbsp;·&nbsp; align pairwise distances, not only predictions</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="method">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Method</span>
+        <h2>Workflow of Contrastive Symbolic Regression</h2>
+        <p>
+          GP constructs symbolic features; closed-form contrastive alignment projects them into a target-aware space;
+          ridge + KNN predict; DPP selects a diverse high-quality ensemble.
+        </p>
+      </div>
+      <figure class="card">
+        <img src="assets/workflow.png" alt="CSR workflow diagram">
+        <figcaption class="caption">Overall evolutionary feature construction pipeline (paper Fig.&nbsp;2).</figcaption>
+      </figure>
+
+      <div class="contribs" style="margin-top:1rem">
+        <div class="contrib c1"><span class="tag">C1</span><p><strong>Closed-form W</strong> — contrastive projection without iterative gradients inside evolution.</p></div>
+        <div class="contrib c2"><span class="tag">C2</span><p><strong>Efficient LOOCV for K</strong> — one neighbor search selects neighborhood size for all K.</p></div>
+        <div class="contrib c3"><span class="tag">C3</span><p><strong>Rank-weighted KNN</strong> — faithful fitness for representation smoothness.</p></div>
+        <div class="contrib c4"><span class="tag">C4</span><p><strong>DPP ensemble</strong> — quality–diversity hall-of-fame selection.</p></div>
+      </div>
+
+      <div class="method-steps">
+        <div class="step"><strong>I–II · Symbolic features</strong><span>EQL warm-start + GP multi-tree feature construction.</span></div>
+        <div class="step"><strong>III · Contrastive align</strong><span>Closed-form W so feature distances track target distances.</span></div>
+        <div class="step"><strong>IV–VI · Predict &amp; ensemble</strong><span>Ridge (global) + KNN (local) with DPP archive selection.</span></div>
+      </div>
+
+      <div class="eq-box">
+        <strong>Closed-form contrastive alignment</strong> <span style="color:var(--teal);font-weight:700">(fast &amp; non-iterative)</span>
+        <img src="assets/math/closed_form.svg" alt="Closed-form contrastive alignment equation">
+        <div class="note"><b>B</b>: pairwise feature diffs &nbsp;·&nbsp; <b>d</b>: target distances &nbsp;·&nbsp; <b>λ</b>: regularization</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="results">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Results</span>
+        <h2>SRBench: #1 overall accuracy</h2>
+        <p>CSR is evaluated against 27 symbolic regression and machine learning algorithms on 58 real-world datasets.</p>
+      </div>
+
+      <div class="callout">
+        <div class="rank-medal"><span>#1</span><small>Rank</small></div>
+        <div>
+          <strong>Highest overall test R² among 27 algorithms</strong>
+          <div style="color:var(--muted);margin-top:0.2rem">Outperforms transformer-assisted symbolic regression (RAG-SR) and strong ML baselines including XGBoost / LightGBM on aggregate rank.</div>
+        </div>
+      </div>
+
+      <figure class="card">
+        <h3>R², model size, and training time (SRBench)</h3>
+        <img src="assets/srbench_pairgrid.png" alt="Pairgrid of R2, model size, and training time across algorithms">
+        <figcaption class="caption">Asterisk (*) denotes symbolic regression methods. CSR leads on accuracy with competitive training time.</figcaption>
+      </figure>
+
+      <div class="grid-2" style="margin-top:1rem">
+        <figure class="card">
+          <h3>Ablation: base learners &amp; objectives</h3>
+          <img src="assets/r2_score_learner.png" alt="Average R2 rank across SR variants">
+          <figcaption class="caption">SR<sup>All</sup> (CSR) wins; contrastive learning and LOOCV-K progressively help.</figcaption>
+        </figure>
+        <figure class="card">
+          <h3>Training time across variants</h3>
+          <img src="assets/training_time.png" alt="Training time comparison of SR variants">
+          <figcaption class="caption">Closed-form alignment keeps cost in the same order as strong GP baselines.</figcaption>
+        </figure>
+      </div>
+
+      <div class="card" style="margin-top:1rem">
+        <h3>Normalized median R² across 58 datasets</h3>
+        <div class="table-wrap">
+          <table class="data">
+            <thead>
+              <tr><th>Variant</th><th>Norm. Med. R²</th><th>95% CI</th></tr>
+            </thead>
+            <tbody>
+              <tr class="best"><td>SR<sup>All</sup> (CSR)</td><td>0.8884</td><td>[0.7787, 0.9547]</td></tr>
+              <tr><td>SR<sup>LR+CL+KNN</sup></td><td>0.8310</td><td>[0.7528, 0.8579]</td></tr>
+              <tr><td>SR<sup>LR+PLS+KNN</sup></td><td>0.8244</td><td>[0.6766, 0.8578]</td></tr>
+              <tr><td>SR<sup>LR+KNN</sup></td><td>0.8241</td><td>[0.7120, 0.8967]</td></tr>
+              <tr><td>SR<sup>LR+LPP+KNN</sup></td><td>0.7647</td><td>[0.6756, 0.8392]</td></tr>
+              <tr><td>SR<sup>LR+DT</sup></td><td>0.7628</td><td>[0.5499, 0.8615]</td></tr>
+              <tr><td>SR<sup>LR</sup></td><td>0.6602</td><td>[0.2731, 0.7914]</td></tr>
+              <tr><td>SR<sup>CL+LOO-KNN</sup></td><td>0.6410</td><td>[0.5307, 0.7458]</td></tr>
+              <tr><td>SR<sup>CL+KNN</sup></td><td>0.6064</td><td>[0.4541, 0.7437]</td></tr>
+              <tr><td>SR<sup>LOO-KNN</sup></td><td>0.5905</td><td>[0.4353, 0.6900]</td></tr>
+              <tr><td>SR<sup>DT</sup></td><td>0.4861</td><td>[0.3597, 0.7119]</td></tr>
+              <tr><td>SR<sup>KNN</sup></td><td>0.4613</td><td>[0.3538, 0.6254]</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="caption">Median R² normalized per dataset; bootstrapped 95% CIs (paper Table&nbsp;2).</p>
+      </div>
+
+      <div class="grid-2" style="margin-top:1rem">
+        <figure class="card">
+          <h3>Pairwise statistical comparison</h3>
+          <img src="assets/pairwise_comparison.png" alt="Pairwise Wilcoxon comparison heatmap on black-box problems">
+          <figcaption class="caption">CSR wins most head-to-head tests on black-box problems.</figcaption>
+        </figure>
+        <figure class="card">
+          <h3>Ensemble selection</h3>
+          <img src="assets/r2_score_ensemble_rank.png" alt="Ensemble variant average ranks">
+          <figcaption class="caption">DPP quality–diversity improves average R² rank over naive top-k archives.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="representation">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Representation</span>
+        <h2>Contrastive learning reshapes the feature geometry</h2>
+        <p>On OpenML 1089 (crime rate), PCA and pairwise distances show progressive alignment with the target structure.</p>
+      </div>
+      <div class="grid-3">
+        <figure class="card">
+          <h3>Original</h3>
+          <img src="assets/original_features_pca.png" alt="PCA of original features">
+        </figure>
+        <figure class="card">
+          <h3>Feature construction</h3>
+          <img src="assets/std_features_pca.png" alt="PCA after GP feature construction">
+        </figure>
+        <figure class="card">
+          <h3>FC + contrastive</h3>
+          <img src="assets/transformed_features_pca.png" alt="PCA after contrastive alignment">
+        </figure>
+      </div>
+      <p class="caption" style="margin:0.6rem 0 1rem">Color = residual target after ridge. Contrastive alignment produces clearer local structure for KNN.</p>
+      <div class="grid-4">
+        <figure class="card"><h3>Original</h3><img src="assets/original_feature_distances.png" alt="Original pairwise distances"></figure>
+        <figure class="card"><h3>FC</h3><img src="assets/constructed_feature_distances.png" alt="Constructed feature distances"></figure>
+        <figure class="card"><h3>FC+CL</h3><img src="assets/transformed_feature_distances.png" alt="Contrastive feature distances"></figure>
+        <figure class="card"><h3>Target</h3><img src="assets/target_pairwise_distances.png" alt="Target pairwise distances"></figure>
+      </div>
+      <p class="caption" style="margin-top:0.6rem">Pairwise distance matrices: FC+CL closely matches the target distance structure.</p>
+    </div>
+  </section>
+
+  <section id="interpretability">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Interpretability</span>
+        <h2>Symbolic formulas + case retrieval</h2>
+        <p>Two levels: readable GP features, and KNN neighbors that justify a prediction with similar historical instances.</p>
+      </div>
+
+      <div class="interpret-layout">
+        <aside class="query-panel">
+          <div style="font-size:0.85rem;opacity:0.85">Query instance</div>
+          <div style="font-size:1.45rem;font-weight:800;font-family:'Source Serif 4',Georgia,serif">Maine</div>
+          <img src="assets/maine.png" alt="Map highlighting Maine">
+          <span class="target">Target = 54</span>
+          <ul style="margin:1rem 0 0;padding-left:1.1rem;font-size:0.92rem;line-height:1.45">
+            <li><strong>Feature-level:</strong> symbolic formulas</li>
+            <li><strong>Instance-level:</strong> KNN case retrieval</li>
+          </ul>
+        </aside>
+
+        <div>
+          <div class="grid-2">
+            <div class="card">
+              <span class="mini-title green">(a) Learned symbolic space</span>
+              <table class="neighbors">
+                <thead><tr><th>Rank</th><th>Neighbor</th><th>Target</th><th>Δ</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td>North Dakota</td><td>37</td><td class="good">−17</td></tr>
+                  <tr><td>2</td><td>Kansas</td><td>66</td><td class="good">+12</td></tr>
+                  <tr><td>3</td><td>Vermont</td><td>54</td><td class="good">0</td></tr>
+                  <tr><td>4</td><td>Minnesota</td><td>74</td><td class="warn">+20</td></tr>
+                  <tr><td>5</td><td>Pennsylvania</td><td>65</td><td class="good">+11</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="card">
+              <span class="mini-title blue">(b) Original space</span>
+              <table class="neighbors">
+                <thead><tr><th>Rank</th><th>Neighbor</th><th>Target</th><th>Δ</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td>Vermont</td><td>54</td><td class="good">0</td></tr>
+                  <tr><td>2</td><td>Minnesota</td><td>74</td><td class="warn">+20</td></tr>
+                  <tr><td>3</td><td>New Mexico</td><td>122</td><td class="bad">+68</td></tr>
+                  <tr><td>4</td><td>Rhode Island</td><td>127</td><td class="bad">+73</td></tr>
+                  <tr><td>5</td><td>New Hampshire</td><td>34</td><td class="warn">−20</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:1rem">
+            <span class="mini-title purple">(c) Key evolved features</span>
+            <div class="table-wrap">
+              <table class="data">
+                <thead><tr><th>Feature</th><th>Formula</th><th>Semantic interpretation</th></tr></thead>
+                <tbody>
+                  <tr><td><b>Φ₁</b></td><td><code>min(X₃, max(X₁₀, X₉))</code></td><td>Education, unemployment, race</td></tr>
+                  <tr><td><b>Φ₂</b></td><td><code>X₃ · X₁₁</code></td><td>Education × police funding</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <figure class="card" style="margin-top:1rem">
+        <h3>KNN retrieval visualization (US crime rate)</h3>
+        <img src="assets/knn_retrieval.png" alt="KNN retrieval comparison between learned and original spaces">
+        <figcaption class="caption">Neighbors in the learned space have much closer targets than in the raw feature space.</figcaption>
+      </figure>
+
+      <div class="grid-2" style="margin-top:1rem">
+        <figure class="card">
+          <h3>Feature importance</h3>
+          <img src="assets/knn_sr.png" alt="Feature importance in constructed space">
+        </figure>
+        <figure class="card">
+          <h3>Constructed feature vs. crime rate</h3>
+          <img src="assets/constructed_feature_analysis.png" alt="Relationship between constructed feature and crime rate">
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="knn">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Efficient KNN</span>
+        <h2>Adaptive K without nested LOOCV cost</h2>
+        <p>One neighbor search yields prefix means for every K; rank weighting judges representation quality during evolution.</p>
+      </div>
+      <div class="grid-2">
+        <figure class="card">
+          <h3>Runtime: naive vs. CSR LOOCV</h3>
+          <img src="assets/k_selection_time_boxplot_log.svg" alt="Log-scale runtime boxplot for K selection methods">
+          <figcaption class="caption">CSR LOOCV is orders of magnitude faster than naive leave-one-out over K.</figcaption>
+        </figure>
+        <div class="card">
+          <h3>Rank-weighted prediction</h3>
+          <div class="eq-box" style="margin:0;border:none;background:transparent;padding:0">
+            <img src="assets/math/rank_prediction.svg" alt="Rank-weighted KNN formula" style="max-height:90px">
+          </div>
+          <p class="caption">Closer neighbors receive higher linear-rank weight, exposing chaotic vs. smooth neighborhoods that uniform averaging hides.</p>
+          <div class="table-wrap" style="margin-top:0.8rem">
+            <table class="data">
+              <thead><tr><th>Component</th><th>Role in CSR</th></tr></thead>
+              <tbody>
+                <tr><td>LR</td><td>Global parametric trend (ridge)</td></tr>
+                <tr><td>CL</td><td>Closed-form target–distance alignment</td></tr>
+                <tr><td>LOO-KNN</td><td>Adaptive neighborhood size</td></tr>
+                <tr><td>DPP</td><td>Diverse high-quality ensemble</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="citation">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Citation</span>
+        <h2>Use CSR in your work</h2>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <h3>BibTeX</h3>
+          <pre class="bib">@inproceedings{zhang2026contrastive,
+  title     = {Contrastive Symbolic Regression:
+               Aligned Representations, Adaptive
+               Prediction, and Diverse Ensembles},
+  author    = {Zhang, Hengzhe and Chen, Qi and
+               Xue, Bing and Banzhaf, Wolfgang and
+               Zhang, Mengjie},
+  booktitle = {Proceedings of the 43rd International
+               Conference on Machine Learning},
+  year      = {2026}
+}</pre>
+        </div>
+        <div class="card">
+          <h3>Links</h3>
+          <ul style="margin:0;padding-left:1.1rem;line-height:1.9">
+            <li><a href="https://github.com/hengzhe-zhang/CSR-ICML">GitHub: hengzhe-zhang/CSR-ICML</a></li>
+            <li><a href="https://github.com/hengzhe-zhang/EvolutionaryForest">EvolutionaryForest (dependency)</a></li>
+            <li>Contact: <a href="mailto:qi.chen@ecs.vuw.ac.nz">qi.chen@ecs.vuw.ac.nz</a></li>
+          </ul>
+          <div class="logos" style="margin-top:1.4rem">
+            <img src="assets/vuw.png" alt="Victoria University of Wellington">
+            <img src="assets/msu.png" alt="Michigan State University">
+            <img src="assets/icml_logo.svg" alt="ICML" style="height:42px">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div>© 2026 CSR authors · Project page for the ICML 2026 paper</div>
+      <div><a href="#top">Back to top</a></div>
+    </div>
+  </footer>
+</body>
+</html>

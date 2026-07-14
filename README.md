@@ -1,5 +1,7 @@
 # CSR: Contrastive Symbolic Regression
 
+**Project page:** https://hengzhe-zhang.github.io/CSR-ICML/
+
 This repository implements **"Contrastive Symbolic Regression: Aligned Representations, Adaptive Prediction, and Diverse Ensembles"** as presented in the ICML 2026 paper. CSR integrates evolutionary feature construction with contrastive learning and adaptive K-nearest neighbor regression for interpretable symbolic regression.
 
 ## 🌟 Overview
