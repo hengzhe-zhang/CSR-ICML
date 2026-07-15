@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,700;8..60,800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260715-6">
+  <link rel="stylesheet" href="styles.css?v=20260715-21">
 </head>
 <body>
   <nav class="nav" aria-label="Primary">
@@ -75,16 +75,12 @@
         <div class="abstract-mark" aria-hidden="true">Φ</div>
         <div>
         <p>
-          Existing symbolic regression approaches primarily learn explicit input–output mappings and often neglect
-          relational structure among instances. <strong>Contrastive Symbolic Regression (CSR)</strong> integrates
-          evolutionary feature construction with contrastive learning to shape a representation space where geometric
-          proximity reflects similarity in the target space. A closed-form linear transformation aligns constructed
-          features with targets; ridge regression captures global trends while adaptive KNN models local residuals;
-          and DPP-based ensemble selection improves robustness via quality–diversity.
+          <strong>Contrastive Symbolic Regression (CSR)</strong> learns symbolic features whose geometry reflects target
+          similarity. Closed-form contrastive alignment shapes the feature space, ridge and adaptive KNN combine global
+          and local predictions, and a DPP ensemble balances quality with diversity.
         </p>
         <p style="margin-bottom:0">
-          On 58 real-world regression datasets, CSR consistently surpasses traditional symbolic regression and modern
-          machine learning counterparts.
+          Across 58 real-world datasets, CSR ranks first overall among 27 symbolic regression and machine learning methods.
         </p>
         </div>
       </div>
@@ -97,7 +93,7 @@
         <span class="eyebrow">Motivation</span>
         <h2>Why regression needs distance alignment</h2>
         <p>
-          Classification can group discrete classes; regression needs a continuous geometry where nearby points share
+          Classification can group discrete classes. Regression needs a continuous geometry where nearby points share
           similar targets — the setting where KNN and instance-level explanations work.
         </p>
       </div>
@@ -137,8 +133,8 @@
         <span class="eyebrow">Method</span>
         <h2>Workflow of Contrastive Symbolic Regression</h2>
         <p>
-          GP constructs symbolic features; closed-form contrastive alignment projects them into a target-aware space;
-          ridge + KNN predict; DPP selects a diverse high-quality ensemble.
+          GP constructs symbolic features. Closed-form contrastive alignment projects them into a target-aware space.
+          Ridge + KNN predict, and DPP selects a diverse high-quality ensemble.
         </p>
       </div>
       <div class="method-showcase">
@@ -219,24 +215,18 @@
               </tbody>
             </table>
           </div>
-          <p class="caption">Median R² normalized per dataset; bootstrapped 95% CIs (paper Table&nbsp;2).</p>
+          <p class="caption">Median R² normalized per dataset with bootstrapped 95% CIs (paper Table&nbsp;2).</p>
         </div>
       </div>
 
-      <div class="grid-2" style="margin-top:0.75rem">
-        <figure class="card">
+      <div class="results-secondary">
+        <figure class="card figure-card">
           <h3>Ablation: base learners &amp; objectives</h3>
-          <img src="assets/r2_score_learner.png" alt="Average R2 rank across SR variants">
-          <figcaption class="caption">SR<sup>All</sup> (CSR) wins; contrastive learning and LOOCV-K progressively help.</figcaption>
+          <div class="figure-frame">
+            <img src="assets/r2_score_learner.png" alt="Average R2 rank across SR variants">
+          </div>
+          <figcaption class="caption">SR<sup>All</sup> (CSR) wins. Contrastive learning and LOOCV-K progressively help.</figcaption>
         </figure>
-        <figure class="card">
-          <h3>Training time across variants</h3>
-          <img src="assets/training_time.png" alt="Training time comparison of SR variants">
-          <figcaption class="caption">Closed-form alignment keeps cost in the same order as strong GP baselines.</figcaption>
-        </figure>
-      </div>
-
-      <div class="grid-2 balanced-figures" style="margin-top:0.75rem">
         <figure class="card figure-card">
           <h3>Pairwise statistical comparison</h3>
           <div class="figure-frame">
@@ -378,32 +368,70 @@
       <div class="section-head">
         <span class="eyebrow">Efficient KNN</span>
         <h2>Adaptive K without nested LOOCV cost</h2>
-        <p>One neighbor search yields prefix means for every K; rank weighting judges representation quality during evolution.</p>
+        <p>One neighbor search yields prefix means for every K. Rank weighting judges representation quality during evolution.</p>
       </div>
-      <div class="grid-2">
-        <figure class="card">
-          <h3>Runtime: naive vs. CSR LOOCV</h3>
-          <img src="assets/k_selection_time_boxplot_log.svg" alt="Log-scale runtime boxplot for K selection methods">
-          <figcaption class="caption">CSR LOOCV is orders of magnitude faster than naive leave-one-out over K.</figcaption>
+      <div class="knn-concepts">
+        <figure class="card knn-concept">
+          <h3>Efficient LOOCV for K</h3>
+          <svg class="knn-illustration loocv-flow" viewBox="0 0 320 115" role="img" aria-label="One neighbor search produces prefix means for every K">
+            <text x="58" y="16" fill="#0b5ba7" font-size="15" font-weight="700" text-anchor="middle">1 search</text>
+            <circle cx="58" cy="56" r="30" fill="none" stroke="#5aa7ff" stroke-width="1.6" stroke-dasharray="4 3"/>
+            <circle cx="58" cy="56" r="13" fill="none" stroke="#5aa7ff" stroke-width="1" opacity="0.5"/>
+            <circle cx="58" cy="56" r="22" fill="none" stroke="#5aa7ff" stroke-width="1" opacity="0.32"/>
+            <text x="58" y="62" text-anchor="middle" fill="#5e2ca5" font-size="21">★</text>
+            <rect x="45" y="24" width="26" height="12" rx="2" fill="#fff" stroke="#5aa7ff"/>
+            <text x="58" y="33" text-anchor="middle" fill="#3b52aa" font-size="10.5" font-weight="700">Self</text>
+            <line x1="51" y1="49" x2="65" y2="63" stroke="#d32f2f" stroke-width="2.1"/>
+            <line x1="65" y1="49" x2="51" y2="63" stroke="#d32f2f" stroke-width="2.1"/>
+            <g fill="#0b5ba7" stroke="#fff"><circle cx="70" cy="51" r="3.6"/><circle cx="43" cy="49" r="3.4"/><circle cx="76" cy="72" r="3.2"/><circle cx="34" cy="76" r="3"/><circle cx="81" cy="32" r="2.8"/></g>
+            <text x="58" y="103" fill="#0b5ba7" font-size="11" font-weight="700" text-anchor="middle">Near → far</text>
+            <line x1="100" y1="56" x2="136" y2="56" stroke="#3b52aa" stroke-width="3" marker-end="url(#knn-arrow)"/>
+            <text x="118" y="45" fill="#3b52aa" font-size="11" font-weight="700" text-anchor="middle">Exclude self</text>
+            <text x="232" y="16" fill="#0b5ba7" font-size="15" font-weight="700" text-anchor="middle">Prefix means for all K</text>
+            <g fill="#ebf3fb" stroke="#0b5ba7" stroke-width="1.5"><rect x="158" y="35" width="29" height="23" rx="3"/><rect x="194" y="35" width="29" height="23" rx="3"/><rect x="230" y="35" width="29" height="23" rx="3"/><rect x="266" y="35" width="29" height="23" rx="3"/></g>
+            <g fill="#111827" font-size="12" font-weight="700" text-anchor="middle"><text x="172.5" y="51">y₁</text><text x="208.5" y="51">y₂</text><text x="244.5" y="51">…</text><text x="280.5" y="51">yₖ</text></g>
+            <path d="M158 65 V72 H187 V65 M158 81 V89 H223 V81 M158 97 V106 H295 V97" fill="none" stroke="#3b52aa" stroke-width="1.6"/>
+            <text x="172" y="81" fill="#3b52aa" font-size="8.8" font-weight="700" text-anchor="middle">Mean K=1</text>
+            <text x="191" y="98" fill="#3b52aa" font-size="8.8" font-weight="700" text-anchor="middle">Mean K=2</text>
+            <text x="227" y="114" fill="#3b52aa" font-size="8.2" font-weight="700" text-anchor="middle">Mean K=1…Kmax</text>
+            <defs><marker id="knn-arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#3b52aa"/></marker></defs>
+          </svg>
+          <figcaption class="caption">One search orders neighbors once, excludes the query, and evaluates every prefix K.</figcaption>
         </figure>
-        <div class="card">
+        <figure class="card knn-concept">
           <h3>Rank-weighted prediction</h3>
+          <svg class="knn-illustration rank-knn" viewBox="0 0 260 155" role="img" aria-label="Smooth and chaotic neighborhoods under rank-weighted KNN">
+            <text x="65" y="14" fill="#083b63" font-size="11" font-weight="700" text-anchor="middle">Smooth space</text>
+            <circle cx="65" cy="65" r="42" fill="none" stroke="#cbd5e1" stroke-dasharray="3 3"/>
+            <text x="65" y="71" text-anchor="middle" fill="#5e2ca5" font-size="18">★</text>
+            <line x1="65" y1="65" x2="82" y2="53" stroke="#0b5ba7" stroke-width="2.5"/>
+            <line x1="65" y1="65" x2="43" y2="49" stroke="#0b5ba7" stroke-width="1.8"/>
+            <line x1="65" y1="65" x2="52" y2="105" stroke="#3b52aa" stroke-width="1.2"/>
+            <g fill="#ebf3fb" stroke="#0b5ba7" stroke-width="1.5"><circle cx="82" cy="53" r="8"/><circle cx="43" cy="49" r="8"/><circle cx="52" cy="105" r="8"/></g>
+            <g font-size="9" font-weight="700" text-anchor="middle"><text x="82" y="56">5</text><text x="43" y="52">1</text><text x="52" y="108">9</text></g>
+            <text x="65" y="125" fill="#4b5563" font-size="9.5" text-anchor="middle">Uniform = 5.0</text>
+            <text x="65" y="139" fill="#08796d" font-size="9.5" font-weight="700" text-anchor="middle">Weighted = 5.0 ✓</text>
+            <text x="195" y="14" fill="#083b63" font-size="11" font-weight="700" text-anchor="middle">Chaotic space</text>
+            <circle cx="195" cy="65" r="42" fill="none" stroke="#cbd5e1" stroke-dasharray="3 3"/>
+            <text x="195" y="71" text-anchor="middle" fill="#5e2ca5" font-size="18">★</text>
+            <line x1="195" y1="65" x2="212" y2="53" stroke="#3b52aa" stroke-width="2.5"/>
+            <line x1="195" y1="65" x2="173" y2="49" stroke="#0b5ba7" stroke-width="1.8"/>
+            <line x1="195" y1="65" x2="182" y2="105" stroke="#0b5ba7" stroke-width="1.2"/>
+            <g fill="#ebf3fb" stroke="#0b5ba7" stroke-width="1.5"><circle cx="212" cy="53" r="8"/><circle cx="173" cy="49" r="8"/><circle cx="182" cy="105" r="8"/></g>
+            <g font-size="9" font-weight="700" text-anchor="middle"><text x="212" y="56">9</text><text x="173" y="52">5</text><text x="182" y="108">1</text></g>
+            <text x="195" y="125" fill="#4b5563" font-size="9.5" text-anchor="middle">Uniform = 5.0</text>
+            <text x="195" y="139" fill="#dc2626" font-size="9.5" font-weight="700" text-anchor="middle">Weighted = 7.1 ✕</text>
+          </svg>
           <div class="eq-box" style="margin:0;border:none;background:transparent;padding:0">
             <img src="assets/math/rank_prediction.svg" alt="Rank-weighted KNN formula" style="max-height:90px">
           </div>
-          <p class="caption">Closer neighbors receive higher linear-rank weight, exposing chaotic vs. smooth neighborhoods that uniform averaging hides.</p>
-          <div class="table-wrap" style="margin-top:0.6rem">
-            <table class="data">
-              <thead><tr><th>Component</th><th>Role in CSR</th></tr></thead>
-              <tbody>
-                <tr><td>LR</td><td>Global parametric trend (ridge)</td></tr>
-                <tr><td>CL</td><td>Closed-form target–distance alignment</td></tr>
-                <tr><td>LOO-KNN</td><td>Adaptive neighborhood size</td></tr>
-                <tr><td>DPP</td><td>Diverse high-quality ensemble</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+          <figcaption class="caption">Closer neighbors receive more weight, revealing whether the learned space is locally smooth.</figcaption>
+        </figure>
+        <figure class="card knn-concept knn-runtime-card">
+          <h3>Runtime: naive vs. CSR LOOCV</h3>
+          <img class="knn-illustration" src="assets/k_selection_time_boxplot_log.svg" alt="Log-scale runtime boxplot for K selection methods">
+          <figcaption class="caption">CSR LOOCV is orders of magnitude faster than naive leave-one-out over K.</figcaption>
+        </figure>
       </div>
     </div>
   </section>

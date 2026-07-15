@@ -445,6 +445,20 @@ figure.card img {
   gap: 0.7rem;
 }
 
+#representation .grid-3 .card {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-width: 0;
+}
+
+#representation .grid-3 img {
+  width: auto;
+  max-width: 68%;
+  max-height: 11rem;
+  margin: auto;
+  object-fit: contain;
+}
+
 .motivation-card {
   display: grid;
   grid-template-columns: minmax(8.5rem, 0.72fr) minmax(0, 1.28fr);
@@ -568,6 +582,71 @@ figure.card img {
 .results-table-card table.data th,
 .results-table-card table.data td {
   padding: 0.42rem 0.55rem;
+}
+
+.results-secondary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  align-items: stretch;
+}
+
+.results-secondary .figure-card {
+  min-width: 0;
+}
+
+.results-secondary .figure-frame {
+  height: 15rem;
+  padding: 0.35rem;
+}
+
+.results-secondary .figure-frame img,
+.results-secondary .figure-card--compact .figure-frame img {
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.results-secondary .figure-card--compact .figure-frame img {
+  max-width: 70%;
+  max-height: 72%;
+}
+
+.results-secondary .card h3 {
+  min-height: 1.5rem;
+}
+
+.results-secondary .caption {
+  min-height: 2.5rem;
+}
+
+.knn-concepts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.knn-concept {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-width: 0;
+}
+
+.knn-illustration {
+  width: 100%;
+  height: 10rem;
+  margin: 0.35rem auto 0.6rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.rank-knn {
+  width: 88%;
+}
+
+.knn-concept .caption {
+  min-height: 2.8rem;
 }
 
 .abstract {
@@ -801,7 +880,7 @@ table.neighbors th {
   display: grid;
   grid-template-columns: minmax(16rem, 0.72fr) minmax(0, 1.55fr);
   gap: 0.75rem;
-  align-items: start;
+  align-items: stretch;
 }
 
 .query-panel {
@@ -999,6 +1078,105 @@ pre.bib {
   object-fit: contain;
 }
 
+/* Flat visual system */
+:root {
+  --shadow: none;
+  --shadow-hover: none;
+  --radius: 12px;
+}
+
+.nav {
+  background: #fff;
+  border-bottom-color: var(--line);
+  backdrop-filter: none;
+}
+
+.brand-mark,
+.abstract-mark {
+  background: var(--teal);
+}
+
+.hero {
+  background: var(--navy-deep);
+}
+
+.hero::before,
+.hero-orb {
+  display: none;
+}
+
+.pill,
+.btn-ghost {
+  backdrop-filter: none;
+}
+
+.pill {
+  background: transparent;
+}
+
+.hero-card {
+  transform: none;
+}
+
+.stat {
+  background: var(--sand);
+}
+
+section:nth-of-type(even) {
+  background: #f7f9fb;
+}
+
+.section-head .eyebrow::before,
+.step::before {
+  background: var(--teal);
+}
+
+.abstract {
+  background: #f4faf8;
+}
+
+.query-panel {
+  background: var(--navy);
+}
+
+.callout {
+  background: #edf7f5;
+}
+
+.rank-medal {
+  background: #f6c453;
+}
+
+.eq-box {
+  background: #f4f8fa;
+}
+
+.nav,
+.brand-mark,
+.btn-primary,
+.hero-card,
+.hero-card-label span,
+.card,
+.abstract-mark,
+.contrib,
+.query-panel,
+.rank-medal {
+  box-shadow: none;
+}
+
+.btn,
+.card,
+.contrib {
+  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn:hover,
+.card:hover,
+.contrib:hover {
+  transform: none;
+  box-shadow: none;
+}
+
 @media (max-width: 920px) {
   .hero-grid,
   .grid-2,
@@ -1030,9 +1208,17 @@ pre.bib {
     grid-template-columns: 1fr;
   }
 
+  .knn-concepts {
+    grid-template-columns: 1fr;
+  }
+
   .evidence-side {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
+  }
+
+  .results-secondary {
+    grid-template-columns: 1fr 1fr;
   }
 
   .method-steps {
@@ -1077,6 +1263,24 @@ pre.bib {
 
   .evidence-side {
     grid-template-columns: 1fr;
+  }
+
+  .results-secondary {
+    grid-template-columns: 1fr;
+  }
+
+  .results-secondary .card h3,
+  .results-secondary .caption {
+    min-height: 0;
+  }
+
+  .knn-concept .caption {
+    min-height: 0;
+  }
+
+  .knn-illustration,
+  .rank-knn {
+    width: 100%;
   }
 
   .figure-frame {
