@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,700;8..60,800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260715-2">
+  <link rel="stylesheet" href="styles.css?v=20260715-3">
 </head>
 <body>
   <nav class="nav" aria-label="Primary">
@@ -113,7 +113,7 @@
           <figcaption class="caption">Continuous targets require geometry that tracks target proximity.</figcaption>
         </figure>
       </div>
-      <div class="eq-box" style="margin-top:1rem">
+      <div class="eq-box" style="margin-top:0.75rem">
         <strong>Target-aligned representation</strong>
         <img src="assets/math/target_align.svg" alt="Feature distance proportional to target distance">
         <div class="note"><b>Φ(x)</b>: symbolic features &nbsp;·&nbsp; <b>y</b>: target &nbsp;·&nbsp; align pairwise distances, not only predictions</div>
@@ -136,7 +136,7 @@
         <figcaption class="caption">Overall evolutionary feature construction pipeline (paper Fig.&nbsp;2).</figcaption>
       </figure>
 
-      <div class="contribs" style="margin-top:1rem">
+      <div class="contribs" style="margin-top:0.75rem">
         <div class="contrib c1"><span class="tag">C1</span><span class="contrib-icon" aria-hidden="true">W</span><p><strong>Closed-form W</strong> — contrastive projection without iterative gradients inside evolution.</p></div>
         <div class="contrib c2"><span class="tag">C2</span><span class="contrib-icon" aria-hidden="true">K</span><p><strong>Efficient LOOCV for K</strong> — one neighbor search selects neighborhood size for all K.</p></div>
         <div class="contrib c3"><span class="tag">C3</span><span class="contrib-icon" aria-hidden="true">∑</span><p><strong>Rank-weighted KNN</strong> — faithful fitness for representation smoothness.</p></div>
@@ -179,7 +179,7 @@
         <figcaption class="caption">Asterisk (*) denotes symbolic regression methods. CSR leads on accuracy with competitive training time.</figcaption>
       </figure>
 
-      <div class="grid-2" style="margin-top:1rem">
+      <div class="grid-2" style="margin-top:0.75rem">
         <figure class="card">
           <h3>Ablation: base learners &amp; objectives</h3>
           <img src="assets/r2_score_learner.png" alt="Average R2 rank across SR variants">
@@ -192,7 +192,7 @@
         </figure>
       </div>
 
-      <div class="card" style="margin-top:1rem">
+      <div class="card" style="margin-top:0.75rem">
         <h3>Normalized median R² across 58 datasets</h3>
         <div class="table-wrap">
           <table class="data">
@@ -218,7 +218,7 @@
         <p class="caption">Median R² normalized per dataset; bootstrapped 95% CIs (paper Table&nbsp;2).</p>
       </div>
 
-      <div class="grid-2 balanced-figures" style="margin-top:1rem">
+      <div class="grid-2 balanced-figures" style="margin-top:0.75rem">
         <figure class="card figure-card">
           <h3>Pairwise statistical comparison</h3>
           <div class="figure-frame">
@@ -258,7 +258,7 @@
           <img src="assets/transformed_features_pca.png" alt="PCA after contrastive alignment">
         </figure>
       </div>
-      <p class="caption" style="margin:0.6rem 0 1rem">Color = residual target after ridge. Contrastive alignment produces clearer local structure for KNN.</p>
+      <p class="caption" style="margin:0.45rem 0 0.75rem">Color = residual target after ridge. Contrastive alignment produces clearer local structure for KNN.</p>
       <div class="grid-4">
         <figure class="card"><h3>Original</h3><img src="assets/original_feature_distances.png" alt="Original pairwise distances"></figure>
         <figure class="card"><h3>FC</h3><img src="assets/constructed_feature_distances.png" alt="Constructed feature distances"></figure>
@@ -334,13 +334,13 @@
         </div>
       </div>
 
-      <figure class="card" style="margin-top:1rem">
+      <figure class="card" style="margin-top:0.75rem">
         <h3>KNN retrieval visualization (US crime rate)</h3>
         <img src="assets/knn_retrieval.png" alt="KNN retrieval comparison between learned and original spaces">
         <figcaption class="caption">Neighbors in the learned space have much closer targets than in the raw feature space.</figcaption>
       </figure>
 
-      <div class="grid-2" style="margin-top:1rem">
+      <div class="grid-2" style="margin-top:0.75rem">
         <figure class="card">
           <h3>Feature importance</h3>
           <img src="assets/knn_sr.png" alt="Feature importance in constructed space">
@@ -372,7 +372,7 @@
             <img src="assets/math/rank_prediction.svg" alt="Rank-weighted KNN formula" style="max-height:90px">
           </div>
           <p class="caption">Closer neighbors receive higher linear-rank weight, exposing chaotic vs. smooth neighborhoods that uniform averaging hides.</p>
-          <div class="table-wrap" style="margin-top:0.8rem">
+          <div class="table-wrap" style="margin-top:0.6rem">
             <table class="data">
               <thead><tr><th>Component</th><th>Role in CSR</th></tr></thead>
               <tbody>
@@ -416,7 +416,7 @@
             <li><a href="https://github.com/hengzhe-zhang/EvolutionaryForest">EvolutionaryForest (dependency)</a></li>
             <li>Contact: <a href="mailto:hengzhe.zhang@ecs.vuw.ac.nz">hengzhe.zhang@ecs.vuw.ac.nz</a></li>
           </ul>
-          <div class="logos" style="margin-top:1.4rem">
+          <div class="logos" style="margin-top:1rem">
             <img src="assets/vuw.png" alt="Victoria University of Wellington">
             <img src="assets/msu.png" alt="Michigan State University">
             <img src="assets/icml_logo.svg" alt="ICML" style="height:42px">
