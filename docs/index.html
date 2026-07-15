@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,700;8..60,800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20260715-2">
 </head>
 <body>
   <nav class="nav" aria-label="Primary">
@@ -218,15 +218,19 @@
         <p class="caption">Median R² normalized per dataset; bootstrapped 95% CIs (paper Table&nbsp;2).</p>
       </div>
 
-      <div class="grid-2" style="margin-top:1rem">
-        <figure class="card">
+      <div class="grid-2 balanced-figures" style="margin-top:1rem">
+        <figure class="card figure-card">
           <h3>Pairwise statistical comparison</h3>
-          <img src="assets/pairwise_comparison.png" alt="Pairwise Wilcoxon comparison heatmap on black-box problems">
+          <div class="figure-frame">
+            <img src="assets/pairwise_comparison.png" alt="Pairwise Wilcoxon comparison heatmap on black-box problems">
+          </div>
           <figcaption class="caption">CSR wins most head-to-head tests on black-box problems.</figcaption>
         </figure>
-        <figure class="card">
+        <figure class="card figure-card figure-card--compact">
           <h3>Ensemble selection</h3>
-          <img src="assets/r2_score_ensemble_rank.png" alt="Ensemble variant average ranks">
+          <div class="figure-frame">
+            <img src="assets/r2_score_ensemble_rank.png" alt="Ensemble variant average ranks">
+          </div>
           <figcaption class="caption">DPP quality–diversity improves average R² rank over naive top-k archives.</figcaption>
         </figure>
       </div>
@@ -285,9 +289,9 @@
           </ul>
         </aside>
 
-        <div>
-          <div class="grid-2">
-            <div class="card">
+        <div class="interpret-details">
+          <div class="grid-2 neighbor-grid">
+            <div class="card neighbor-card">
               <span class="mini-title green">(a) Learned symbolic space</span>
               <table class="neighbors">
                 <thead><tr><th>Rank</th><th>Neighbor</th><th>Target</th><th>Δ</th></tr></thead>
@@ -300,7 +304,7 @@
                 </tbody>
               </table>
             </div>
-            <div class="card">
+            <div class="card neighbor-card">
               <span class="mini-title blue">(b) Original space</span>
               <table class="neighbors">
                 <thead><tr><th>Rank</th><th>Neighbor</th><th>Target</th><th>Δ</th></tr></thead>
@@ -315,7 +319,7 @@
             </div>
           </div>
 
-          <div class="card" style="margin-top:1rem">
+          <div class="card feature-card">
             <span class="mini-title purple">(c) Key evolved features</span>
             <div class="table-wrap">
               <table class="data">

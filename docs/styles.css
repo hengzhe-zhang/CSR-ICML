@@ -45,6 +45,7 @@ body {
 }
 
 img { max-width: 100%; height: auto; display: block; }
+figure { margin: 0; }
 
 a { color: var(--blue); text-decoration-thickness: 1px; text-underline-offset: 3px; }
 a:hover { color: var(--teal); }
@@ -444,6 +445,43 @@ figure.card img {
   gap: 0.85rem;
 }
 
+.balanced-figures {
+  align-items: stretch;
+}
+
+.figure-card {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-width: 0;
+}
+
+.figure-frame {
+  height: 19rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0.4rem;
+}
+
+.figure-frame img {
+  width: auto;
+  max-width: 92%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* This source plot has unusually large embedded labels; display it smaller. */
+.figure-card--compact .figure-frame img {
+  max-width: 56%;
+  max-height: 64%;
+}
+
+.figure-card .caption {
+  min-height: 2.7rem;
+  margin-top: 0.8rem;
+}
+
 .abstract {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -625,8 +663,9 @@ table.neighbors th {
 
 .interpret-layout {
   display: grid;
-  grid-template-columns: 0.85fr 1.4fr;
+  grid-template-columns: minmax(16rem, 0.72fr) minmax(0, 1.55fr);
   gap: 1rem;
+  align-items: start;
 }
 
 .query-panel {
@@ -640,8 +679,29 @@ table.neighbors th {
 }
 
 .query-panel img {
+  width: 100%;
+  height: 20rem;
+  object-fit: contain;
   border-radius: 12px;
   margin: 0.7rem 0;
+}
+
+.interpret-details {
+  display: grid;
+  gap: 1rem;
+}
+
+.neighbor-grid {
+  align-items: stretch;
+}
+
+.neighbor-card {
+  min-width: 0;
+  padding: 1rem;
+}
+
+.feature-card {
+  min-width: 0;
 }
 
 .query-panel .target {
@@ -787,6 +847,19 @@ pre.bib {
   .hero-card {
     transform: none;
   }
+
+  .figure-frame {
+    height: auto;
+    min-height: 15rem;
+  }
+
+  .figure-card--compact .figure-frame img {
+    max-width: 68%;
+  }
+
+  .query-panel img {
+    height: 17rem;
+  }
 }
 
 @media (max-width: 560px) {
@@ -797,6 +870,15 @@ pre.bib {
   .abstract { grid-template-columns: 1fr; }
   section { padding: 3.2rem 0; }
   .hero h1 { font-size: 2.15rem; }
+
+  .figure-frame {
+    min-height: 12rem;
+    padding: 0;
+  }
+
+  .figure-card--compact .figure-frame img {
+    max-width: 82%;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
