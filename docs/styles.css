@@ -522,6 +522,54 @@ figure.card img {
   margin-top: 0.55rem;
 }
 
+.results-primary {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(28rem, 0.88fr);
+  gap: 0.75rem;
+  align-items: stretch;
+}
+
+.results-visual {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.results-visual .callout {
+  margin-bottom: 0;
+}
+
+.results-main-figure {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-width: 0;
+}
+
+.results-main-figure img {
+  align-self: center;
+  justify-self: center;
+}
+
+.results-table-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.results-table-card .table-wrap {
+  flex: 1;
+}
+
+.results-table-card table.data {
+  font-size: var(--text-xs);
+}
+
+.results-table-card table.data th,
+.results-table-card table.data td {
+  padding: 0.42rem 0.55rem;
+}
+
 .abstract {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -779,6 +827,45 @@ table.neighbors th {
   gap: 0.75rem;
 }
 
+.interpret-evidence {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(20rem, 0.7fr);
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  align-items: stretch;
+}
+
+.evidence-main {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-width: 0;
+}
+
+.evidence-main img {
+  align-self: center;
+}
+
+.evidence-side {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.evidence-side .card {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-width: 0;
+}
+
+.evidence-side img {
+  width: auto;
+  max-width: 100%;
+  max-height: 11rem;
+  margin: auto;
+  object-fit: contain;
+}
+
 .neighbor-grid {
   align-items: stretch;
 }
@@ -937,8 +1024,15 @@ pre.bib {
   }
 
   .method-showcase,
-  .method-lower {
+  .method-lower,
+  .results-primary,
+  .interpret-evidence {
     grid-template-columns: 1fr;
+  }
+
+  .evidence-side {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
   }
 
   .method-steps {
@@ -978,6 +1072,10 @@ pre.bib {
 
   .method-contribs,
   .method-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .evidence-side {
     grid-template-columns: 1fr;
   }
 

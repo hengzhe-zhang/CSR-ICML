@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,700;8..60,800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260715-5">
+  <link rel="stylesheet" href="styles.css?v=20260715-6">
 </head>
 <body>
   <nav class="nav" aria-label="Primary">
@@ -179,19 +179,49 @@
         <p>CSR is evaluated against 27 symbolic regression and machine learning algorithms on 58 real-world datasets.</p>
       </div>
 
-      <div class="callout">
-        <div class="rank-medal"><span>#1</span><small>Rank</small></div>
-        <div>
-          <strong>Highest overall test R² among 27 algorithms</strong>
-          <div style="color:var(--muted);margin-top:0.2rem">Outperforms transformer-assisted symbolic regression (RAG-SR) and strong ML baselines including XGBoost / LightGBM on aggregate rank.</div>
+      <div class="results-primary">
+        <div class="results-visual">
+          <div class="callout">
+            <div class="rank-medal"><span>#1</span><small>Rank</small></div>
+            <div>
+              <strong>Highest overall test R² among 27 algorithms</strong>
+              <div style="color:var(--muted);margin-top:0.2rem">Outperforms transformer-assisted symbolic regression (RAG-SR) and strong ML baselines including XGBoost / LightGBM on aggregate rank.</div>
+            </div>
+          </div>
+
+          <figure class="card results-main-figure">
+            <h3>R², model size, and training time (SRBench)</h3>
+            <img src="assets/srbench_pairgrid.png" alt="Pairgrid of R2, model size, and training time across algorithms">
+            <figcaption class="caption">Asterisk (*) denotes symbolic regression methods. CSR leads on accuracy with competitive training time.</figcaption>
+          </figure>
+        </div>
+
+        <div class="card results-table-card">
+          <h3>Normalized median R² across 58 datasets</h3>
+          <div class="table-wrap">
+            <table class="data">
+              <thead>
+                <tr><th>Variant</th><th>Norm. Med. R²</th><th>95% CI</th></tr>
+              </thead>
+              <tbody>
+                <tr class="best"><td>SR<sup>All</sup> (CSR)</td><td>0.8884</td><td>[0.7787, 0.9547]</td></tr>
+                <tr><td>SR<sup>LR+CL+KNN</sup></td><td>0.8310</td><td>[0.7528, 0.8579]</td></tr>
+                <tr><td>SR<sup>LR+PLS+KNN</sup></td><td>0.8244</td><td>[0.6766, 0.8578]</td></tr>
+                <tr><td>SR<sup>LR+KNN</sup></td><td>0.8241</td><td>[0.7120, 0.8967]</td></tr>
+                <tr><td>SR<sup>LR+LPP+KNN</sup></td><td>0.7647</td><td>[0.6756, 0.8392]</td></tr>
+                <tr><td>SR<sup>LR+DT</sup></td><td>0.7628</td><td>[0.5499, 0.8615]</td></tr>
+                <tr><td>SR<sup>LR</sup></td><td>0.6602</td><td>[0.2731, 0.7914]</td></tr>
+                <tr><td>SR<sup>CL+LOO-KNN</sup></td><td>0.6410</td><td>[0.5307, 0.7458]</td></tr>
+                <tr><td>SR<sup>CL+KNN</sup></td><td>0.6064</td><td>[0.4541, 0.7437]</td></tr>
+                <tr><td>SR<sup>LOO-KNN</sup></td><td>0.5905</td><td>[0.4353, 0.6900]</td></tr>
+                <tr><td>SR<sup>DT</sup></td><td>0.4861</td><td>[0.3597, 0.7119]</td></tr>
+                <tr><td>SR<sup>KNN</sup></td><td>0.4613</td><td>[0.3538, 0.6254]</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="caption">Median R² normalized per dataset; bootstrapped 95% CIs (paper Table&nbsp;2).</p>
         </div>
       </div>
-
-      <figure class="card">
-        <h3>R², model size, and training time (SRBench)</h3>
-        <img src="assets/srbench_pairgrid.png" alt="Pairgrid of R2, model size, and training time across algorithms">
-        <figcaption class="caption">Asterisk (*) denotes symbolic regression methods. CSR leads on accuracy with competitive training time.</figcaption>
-      </figure>
 
       <div class="grid-2" style="margin-top:0.75rem">
         <figure class="card">
@@ -204,32 +234,6 @@
           <img src="assets/training_time.png" alt="Training time comparison of SR variants">
           <figcaption class="caption">Closed-form alignment keeps cost in the same order as strong GP baselines.</figcaption>
         </figure>
-      </div>
-
-      <div class="card" style="margin-top:0.75rem">
-        <h3>Normalized median R² across 58 datasets</h3>
-        <div class="table-wrap">
-          <table class="data">
-            <thead>
-              <tr><th>Variant</th><th>Norm. Med. R²</th><th>95% CI</th></tr>
-            </thead>
-            <tbody>
-              <tr class="best"><td>SR<sup>All</sup> (CSR)</td><td>0.8884</td><td>[0.7787, 0.9547]</td></tr>
-              <tr><td>SR<sup>LR+CL+KNN</sup></td><td>0.8310</td><td>[0.7528, 0.8579]</td></tr>
-              <tr><td>SR<sup>LR+PLS+KNN</sup></td><td>0.8244</td><td>[0.6766, 0.8578]</td></tr>
-              <tr><td>SR<sup>LR+KNN</sup></td><td>0.8241</td><td>[0.7120, 0.8967]</td></tr>
-              <tr><td>SR<sup>LR+LPP+KNN</sup></td><td>0.7647</td><td>[0.6756, 0.8392]</td></tr>
-              <tr><td>SR<sup>LR+DT</sup></td><td>0.7628</td><td>[0.5499, 0.8615]</td></tr>
-              <tr><td>SR<sup>LR</sup></td><td>0.6602</td><td>[0.2731, 0.7914]</td></tr>
-              <tr><td>SR<sup>CL+LOO-KNN</sup></td><td>0.6410</td><td>[0.5307, 0.7458]</td></tr>
-              <tr><td>SR<sup>CL+KNN</sup></td><td>0.6064</td><td>[0.4541, 0.7437]</td></tr>
-              <tr><td>SR<sup>LOO-KNN</sup></td><td>0.5905</td><td>[0.4353, 0.6900]</td></tr>
-              <tr><td>SR<sup>DT</sup></td><td>0.4861</td><td>[0.3597, 0.7119]</td></tr>
-              <tr><td>SR<sup>KNN</sup></td><td>0.4613</td><td>[0.3538, 0.6254]</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="caption">Median R² normalized per dataset; bootstrapped 95% CIs (paper Table&nbsp;2).</p>
       </div>
 
       <div class="grid-2 balanced-figures" style="margin-top:0.75rem">
@@ -348,21 +352,23 @@
         </div>
       </div>
 
-      <figure class="card" style="margin-top:0.75rem">
-        <h3>KNN retrieval visualization (US crime rate)</h3>
-        <img src="assets/knn_retrieval.png" alt="KNN retrieval comparison between learned and original spaces">
-        <figcaption class="caption">Neighbors in the learned space have much closer targets than in the raw feature space.</figcaption>
-      </figure>
+      <div class="interpret-evidence">
+        <figure class="card evidence-main">
+          <h3>KNN retrieval visualization (US crime rate)</h3>
+          <img src="assets/knn_retrieval.png" alt="KNN retrieval comparison between learned and original spaces">
+          <figcaption class="caption">Neighbors in the learned space have much closer targets than in the raw feature space.</figcaption>
+        </figure>
 
-      <div class="grid-2" style="margin-top:0.75rem">
-        <figure class="card">
-          <h3>Feature importance</h3>
-          <img src="assets/knn_sr.png" alt="Feature importance in constructed space">
-        </figure>
-        <figure class="card">
-          <h3>Constructed feature vs. crime rate</h3>
-          <img src="assets/constructed_feature_analysis.png" alt="Relationship between constructed feature and crime rate">
-        </figure>
+        <div class="evidence-side">
+          <figure class="card">
+            <h3>Feature importance</h3>
+            <img src="assets/knn_sr.png" alt="Feature importance in constructed space">
+          </figure>
+          <figure class="card">
+            <h3>Constructed feature vs. crime rate</h3>
+            <img src="assets/constructed_feature_analysis.png" alt="Relationship between constructed feature and crime rate">
+          </figure>
+        </div>
       </div>
     </div>
   </section>
