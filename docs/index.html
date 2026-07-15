@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,700;8..60,800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260715-3">
+  <link rel="stylesheet" href="styles.css?v=20260715-4">
 </head>
 <body>
   <nav class="nav" aria-label="Primary">
@@ -101,16 +101,26 @@
           similar targets — the setting where KNN and instance-level explanations work.
         </p>
       </div>
-      <div class="grid-2">
-        <figure class="card">
-          <h3>Classification</h3>
-          <img src="assets/classification_moons.png" alt="Classification moons: discrete class clusters">
-          <figcaption class="caption">Discrete labels form separable neighborhoods.</figcaption>
+      <div class="grid-2 motivation-grid">
+        <figure class="card motivation-card">
+          <figcaption class="motivation-copy">
+            <span class="mini-title blue">Discrete targets</span>
+            <h3>Classification</h3>
+            <p>Classes form distinct, separable neighborhoods.</p>
+          </figcaption>
+          <div class="motivation-figure">
+            <img src="assets/classification_moons.png" alt="Classification moons: discrete class clusters">
+          </div>
         </figure>
-        <figure class="card">
-          <h3>Regression</h3>
-          <img src="assets/regression_challenge.png" alt="Regression feature space colored by continuous target">
-          <figcaption class="caption">Continuous targets require geometry that tracks target proximity.</figcaption>
+        <figure class="card motivation-card">
+          <figcaption class="motivation-copy">
+            <span class="mini-title green">Continuous targets</span>
+            <h3>Regression</h3>
+            <p>Geometry must preserve gradual changes in target proximity.</p>
+          </figcaption>
+          <div class="motivation-figure">
+            <img src="assets/regression_challenge.png" alt="Regression feature space colored by continuous target">
+          </div>
         </figure>
       </div>
       <div class="eq-box" style="margin-top:0.75rem">

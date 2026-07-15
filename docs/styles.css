@@ -445,6 +445,46 @@ figure.card img {
   gap: 0.7rem;
 }
 
+.motivation-card {
+  display: grid;
+  grid-template-columns: minmax(8.5rem, 0.72fr) minmax(0, 1.28fr);
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.motivation-copy {
+  margin: 0 !important;
+  align-self: center;
+}
+
+.motivation-copy h3 {
+  margin: 0.35rem 0;
+}
+
+.motivation-copy p {
+  margin: 0;
+  color: var(--muted);
+  font-size: var(--text-sm);
+  line-height: 1.45;
+}
+
+.motivation-figure {
+  height: 13.5rem;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.motivation-figure img {
+  width: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
 .balanced-figures {
   align-items: stretch;
 }
@@ -870,6 +910,14 @@ pre.bib {
   .abstract { grid-template-columns: 1fr; }
   section { padding: 2.5rem 0; }
   .hero h1 { font-size: 2.15rem; }
+
+  .motivation-card {
+    grid-template-columns: 1fr;
+  }
+
+  .motivation-figure {
+    height: 12rem;
+  }
 
   .figure-frame {
     min-height: 10rem;
