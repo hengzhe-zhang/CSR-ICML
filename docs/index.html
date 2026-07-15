@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,700;8..60,800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260715-4">
+  <link rel="stylesheet" href="styles.css?v=20260715-5">
 </head>
 <body>
   <nav class="nav" aria-label="Primary">
@@ -141,28 +141,32 @@
           ridge + KNN predict; DPP selects a diverse high-quality ensemble.
         </p>
       </div>
-      <figure class="card">
-        <img src="assets/workflow.png" alt="CSR workflow diagram">
-        <figcaption class="caption">Overall evolutionary feature construction pipeline (paper Fig.&nbsp;2).</figcaption>
-      </figure>
+      <div class="method-showcase">
+        <figure class="card method-figure">
+          <img src="assets/workflow.png" alt="CSR workflow diagram">
+          <figcaption class="caption">Overall evolutionary feature construction pipeline (paper Fig.&nbsp;2).</figcaption>
+        </figure>
 
-      <div class="contribs" style="margin-top:0.75rem">
-        <div class="contrib c1"><span class="tag">C1</span><span class="contrib-icon" aria-hidden="true">W</span><p><strong>Closed-form W</strong> — contrastive projection without iterative gradients inside evolution.</p></div>
-        <div class="contrib c2"><span class="tag">C2</span><span class="contrib-icon" aria-hidden="true">K</span><p><strong>Efficient LOOCV for K</strong> — one neighbor search selects neighborhood size for all K.</p></div>
-        <div class="contrib c3"><span class="tag">C3</span><span class="contrib-icon" aria-hidden="true">∑</span><p><strong>Rank-weighted KNN</strong> — faithful fitness for representation smoothness.</p></div>
-        <div class="contrib c4"><span class="tag">C4</span><span class="contrib-icon" aria-hidden="true">◆</span><p><strong>DPP ensemble</strong> — quality–diversity hall-of-fame selection.</p></div>
+        <div class="contribs method-contribs">
+          <div class="contrib c1"><span class="tag">C1</span><span class="contrib-icon" aria-hidden="true">W</span><p><strong>Closed-form W</strong> — contrastive projection without iterative gradients inside evolution.</p></div>
+          <div class="contrib c2"><span class="tag">C2</span><span class="contrib-icon" aria-hidden="true">K</span><p><strong>Efficient LOOCV for K</strong> — one neighbor search selects neighborhood size for all K.</p></div>
+          <div class="contrib c3"><span class="tag">C3</span><span class="contrib-icon" aria-hidden="true">∑</span><p><strong>Rank-weighted KNN</strong> — faithful fitness for representation smoothness.</p></div>
+          <div class="contrib c4"><span class="tag">C4</span><span class="contrib-icon" aria-hidden="true">◆</span><p><strong>DPP ensemble</strong> — quality–diversity hall-of-fame selection.</p></div>
+        </div>
       </div>
 
-      <div class="method-steps">
-        <div class="step"><strong>I–II · Symbolic features</strong><span>EQL warm-start + GP multi-tree feature construction.</span></div>
-        <div class="step"><strong>III · Contrastive align</strong><span>Closed-form W so feature distances track target distances.</span></div>
-        <div class="step"><strong>IV–VI · Predict &amp; ensemble</strong><span>Ridge (global) + KNN (local) with DPP archive selection.</span></div>
-      </div>
+      <div class="method-lower">
+        <div class="method-steps">
+          <div class="step"><strong>I–II · Symbolic features</strong><span>EQL warm-start + GP multi-tree feature construction.</span></div>
+          <div class="step"><strong>III · Contrastive align</strong><span>Closed-form W so feature distances track target distances.</span></div>
+          <div class="step"><strong>IV–VI · Predict &amp; ensemble</strong><span>Ridge (global) + KNN (local) with DPP archive selection.</span></div>
+        </div>
 
-      <div class="eq-box">
-        <strong>Closed-form contrastive alignment</strong> <span style="color:var(--teal);font-weight:700">(fast &amp; non-iterative)</span>
-        <img src="assets/math/closed_form.svg" alt="Closed-form contrastive alignment equation">
-        <div class="note"><b>B</b>: pairwise feature diffs &nbsp;·&nbsp; <b>d</b>: target distances &nbsp;·&nbsp; <b>λ</b>: regularization</div>
+        <div class="eq-box">
+          <strong>Closed-form contrastive alignment</strong> <span style="color:var(--teal);font-weight:700">(fast &amp; non-iterative)</span>
+          <img src="assets/math/closed_form.svg" alt="Closed-form contrastive alignment equation">
+          <div class="note"><b>B</b>: pairwise feature diffs &nbsp;·&nbsp; <b>d</b>: target distances &nbsp;·&nbsp; <b>λ</b>: regularization</div>
+        </div>
       </div>
     </div>
   </section>

@@ -550,6 +550,35 @@ figure.card img {
   gap: 0.7rem;
 }
 
+.method-showcase {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(22rem, 0.65fr);
+  gap: 0.75rem;
+  align-items: stretch;
+}
+
+.method-figure {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  min-width: 0;
+}
+
+.method-figure img {
+  width: 100%;
+  align-self: center;
+  object-fit: contain;
+}
+
+.method-contribs {
+  grid-template-columns: 1fr 1fr;
+  align-content: stretch;
+}
+
+.method-contribs .contrib {
+  min-width: 0;
+  height: 100%;
+}
+
 .contrib {
   position: relative;
   overflow: hidden;
@@ -599,6 +628,25 @@ figure.card img {
   grid-template-columns: repeat(3, 1fr);
   gap: 0.7rem;
   margin-top: 0.75rem;
+}
+
+.method-lower {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(20rem, 0.85fr);
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  align-items: stretch;
+}
+
+.method-lower .method-steps {
+  margin-top: 0;
+}
+
+.method-lower .eq-box {
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .step {
@@ -888,6 +936,15 @@ pre.bib {
     transform: none;
   }
 
+  .method-showcase,
+  .method-lower {
+    grid-template-columns: 1fr;
+  }
+
+  .method-steps {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
   .figure-frame {
     height: auto;
     min-height: 13rem;
@@ -917,6 +974,11 @@ pre.bib {
 
   .motivation-figure {
     height: 12rem;
+  }
+
+  .method-contribs,
+  .method-steps {
+    grid-template-columns: 1fr;
   }
 
   .figure-frame {
