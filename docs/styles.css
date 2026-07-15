@@ -18,6 +18,14 @@
   --shadow-hover: 0 24px 65px rgba(6, 42, 71, 0.14);
   --radius: 20px;
   --max: 1180px;
+  /* One shared type scale keeps labels, body copy, and headings consistent. */
+  --text-xs: 0.8rem;
+  --text-sm: 0.9rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --leading-tight: 1.2;
+  --leading-body: 1.6;
 }
 
 * { box-sizing: border-box; }
@@ -31,7 +39,8 @@ body {
   color: var(--ink);
   background: #fff;
   font-family: "Source Sans 3", "Segoe UI", sans-serif;
-  line-height: 1.55;
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
   text-rendering: optimizeLegibility;
 }
 
@@ -82,7 +91,7 @@ a:hover { color: var(--teal); }
   color: #fff;
   display: grid;
   place-items: center;
-  font-size: 0.78rem;
+  font-size: var(--text-xs);
   font-weight: 800;
   box-shadow: 0 6px 15px rgba(8, 121, 109, 0.22);
 }
@@ -99,7 +108,7 @@ a:hover { color: var(--teal); }
 .nav-links a {
   color: var(--muted);
   text-decoration: none;
-  font-size: 0.95rem;
+  font-size: var(--text-sm);
   font-weight: 600;
 }
 
@@ -184,7 +193,7 @@ a:hover { color: var(--teal); }
   gap: 0.35rem;
   padding: 0.28rem 0.7rem;
   border-radius: 999px;
-  font-size: 0.82rem;
+  font-size: var(--text-xs);
   font-weight: 700;
   background: rgba(255,255,255,0.09);
   border: 1px solid rgba(255,255,255,0.18);
@@ -211,7 +220,7 @@ a:hover { color: var(--teal); }
 .hero .lede {
   margin: 0 0 1.25rem;
   color: rgba(255,255,255,0.75);
-  font-size: 1.14rem;
+  font-size: var(--text-lg);
   max-width: 40rem;
 }
 
@@ -224,7 +233,7 @@ a:hover { color: var(--teal); }
 .affils {
   margin: 0 0 1.4rem;
   color: rgba(255,255,255,0.62);
-  font-size: 0.95rem;
+  font-size: var(--text-sm);
 }
 
 .cta-row {
@@ -288,7 +297,7 @@ a:hover { color: var(--teal); }
   gap: 0.45rem;
   padding: 0.25rem 0.4rem 0.65rem;
   color: var(--muted);
-  font-size: 0.74rem;
+  font-size: var(--text-xs);
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -318,13 +327,14 @@ a:hover { color: var(--teal); }
 
 .stat strong {
   display: block;
-  font-size: 1.35rem;
+  font-size: var(--text-xl);
+  line-height: var(--leading-tight);
   color: var(--navy);
   font-family: "Source Serif 4", Georgia, serif;
 }
 
 .stat span {
-  font-size: 0.78rem;
+  font-size: var(--text-xs);
   color: var(--muted);
   font-weight: 600;
 }
@@ -353,7 +363,7 @@ section:nth-of-type(even) {
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  font-size: 0.78rem;
+  font-size: var(--text-xs);
 }
 
 .section-head .eyebrow::before {
@@ -372,12 +382,14 @@ section:nth-of-type(even) {
   font-size: clamp(1.7rem, 2.8vw, 2.35rem);
   color: var(--navy-deep);
   letter-spacing: -0.01em;
+  line-height: var(--leading-tight);
 }
 
 .section-head p {
   margin: 0;
   color: var(--muted);
   max-width: 48rem;
+  font-size: var(--text-base);
 }
 
 .card {
@@ -401,7 +413,8 @@ figure.card img {
 
 .card h3 {
   margin: 0 0 0.7rem;
-  font-size: 1.05rem;
+  font-size: var(--text-lg);
+  line-height: var(--leading-tight);
   color: var(--navy);
 }
 
@@ -409,7 +422,8 @@ figure.card img {
 .caption {
   margin-top: 0.7rem;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: var(--text-sm);
+  line-height: 1.5;
 }
 
 .grid-2 {
@@ -448,7 +462,7 @@ figure.card img {
   color: #fff;
   background: linear-gradient(135deg, var(--teal), var(--blue));
   font-family: "Source Serif 4", Georgia, serif;
-  font-size: 1.45rem;
+  font-size: var(--text-xl);
   box-shadow: 0 10px 22px rgba(8,121,109,0.2);
 }
 
@@ -475,7 +489,7 @@ figure.card img {
   margin-bottom: 0.45rem;
   padding: 0.15rem 0.5rem;
   border-radius: 999px;
-  font-size: 0.75rem;
+  font-size: var(--text-xs);
   font-weight: 800;
   color: #fff;
 }
@@ -487,7 +501,7 @@ figure.card img {
 
 .contrib p {
   margin: 0;
-  font-size: 0.92rem;
+  font-size: var(--text-sm);
   color: var(--muted);
 }
 
@@ -497,7 +511,7 @@ figure.card img {
   right: 0.75rem;
   color: var(--line);
   font-family: "Source Serif 4", Georgia, serif;
-  font-size: 2.4rem;
+  font-size: 2.25rem;
   font-weight: 800;
   line-height: 1;
 }
@@ -536,7 +550,7 @@ figure.card img {
 
 .step span {
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: var(--text-sm);
 }
 
 /* Tables */
@@ -549,7 +563,7 @@ figure.card img {
 table.data {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.92rem;
+  font-size: var(--text-sm);
   background: #fff;
 }
 
@@ -576,7 +590,7 @@ table.data tr.best td {
 table.neighbors {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.88rem;
+  font-size: var(--text-sm);
 }
 
 table.neighbors th,
@@ -586,7 +600,7 @@ table.neighbors td {
 }
 
 table.neighbors th {
-  font-size: 0.78rem;
+  font-size: var(--text-xs);
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: var(--muted);
@@ -601,7 +615,7 @@ table.neighbors th {
   margin-bottom: 0.55rem;
   padding: 0.2rem 0.55rem;
   border-radius: 999px;
-  font-size: 0.78rem;
+  font-size: var(--text-xs);
   font-weight: 800;
 }
 
@@ -636,6 +650,29 @@ table.neighbors th {
   border-radius: 999px;
   background: rgba(255,255,255,0.16);
   font-weight: 700;
+  font-size: var(--text-sm);
+}
+
+.query-kicker {
+  color: rgba(255,255,255,0.82);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.query-name {
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: var(--text-xl);
+  font-weight: 800;
+  line-height: var(--leading-tight);
+}
+
+.query-list {
+  margin: 1rem 0 0;
+  padding-left: 1.1rem;
+  font-size: var(--text-sm);
+  line-height: 1.5;
 }
 
 .callout {
@@ -665,8 +702,8 @@ table.neighbors th {
   box-shadow: 0 8px 18px rgba(232, 163, 23, 0.35);
 }
 
-.rank-medal span { font-size: 1.35rem; }
-.rank-medal small { font-size: 0.7rem; font-weight: 800; }
+.rank-medal span { font-size: var(--text-xl); }
+.rank-medal small { font-size: var(--text-xs); font-weight: 800; }
 
 .eq-box {
   margin-top: 1rem;
@@ -684,7 +721,7 @@ table.neighbors th {
 
 .eq-box .note {
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: var(--text-sm);
 }
 
 pre.bib {
@@ -694,14 +731,14 @@ pre.bib {
   background: #0f1b2d;
   color: #d7e4f5;
   border-radius: 14px;
-  font-size: 0.86rem;
+  font-size: var(--text-sm);
   line-height: 1.45;
 }
 
 .footer {
   padding: 2rem 0 2.6rem;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: var(--text-sm);
   color: rgba(255,255,255,0.65);
   background: var(--navy-deep);
   border-top: 0;
